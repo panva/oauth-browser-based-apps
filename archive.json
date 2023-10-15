@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-09-17T00:35:24.645352+00:00",
+  "timestamp": "2023-10-15T00:36:27.716672+00:00",
   "repo": "oauth-wg/oauth-browser-based-apps",
   "labels": [
     {
@@ -1252,13 +1252,13 @@
       "labels": [],
       "body": "I have added a section on the threats of malicious JS, split out in attack scenarios and consequences. The goal is to refer back to these for each of the architectural patterns, so we can discuss the pros/cons for each and clearly identify what can be achieved.\r\n\r\nRight now, I'd like to get some feedback to ensure that this is all on point. Next steps would be to go through the document and start clarifying the patterns, along with making sure everything is consistent after these changes.\r\n\r\nFYI, I have based this draft PR off of the restructuring branch. I will fix this dependency once those changes are merged. ",
       "createdAt": "2023-09-01T07:13:07Z",
-      "updatedAt": "2023-09-15T18:01:46Z",
+      "updatedAt": "2023-10-13T18:05:04Z",
       "baseRepository": "oauth-wg/oauth-browser-based-apps",
       "baseRefName": "main",
-      "baseRefOid": "deb248704f4a7911e90db0574df546772e0b8f86",
+      "baseRefOid": "ab2b41cc24802e3bc575bd8a738dd85bd799adc4",
       "headRepository": "philippederyck/OAUTHWG-oauth-browser-based-apps",
       "headRefName": "pdr/threat-malicious-js",
-      "headRefOid": "a26f30a582c443bf11d78883bdbbe3452b93a925",
+      "headRefOid": "b00130c4326cbd92263e8c3bc911f96962647823",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
