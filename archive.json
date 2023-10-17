@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-10-15T00:36:27.716672+00:00",
+  "timestamp": "2023-10-17T00:34:08.831100+00:00",
   "repo": "oauth-wg/oauth-browser-based-apps",
   "labels": [
     {
@@ -1250,15 +1250,15 @@
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
-      "body": "I have added a section on the threats of malicious JS, split out in attack scenarios and consequences. The goal is to refer back to these for each of the architectural patterns, so we can discuss the pros/cons for each and clearly identify what can be achieved.\r\n\r\nRight now, I'd like to get some feedback to ensure that this is all on point. Next steps would be to go through the document and start clarifying the patterns, along with making sure everything is consistent after these changes.\r\n\r\nFYI, I have based this draft PR off of the restructuring branch. I will fix this dependency once those changes are merged. ",
+      "body": "This PR contains a major rewrite of this document to better reflect the security challenges of browser-based OAuth clients. The updated spec includes an in-depth analysis of attacks, consequences, and architecture patterns that can be used.\r\n\r\nConcrete changes in this document:\r\n- Added a section on threats of malicios JS (attack payloads and consequences)\r\n- Added a threat analysis to each of the major patterns\r\n- Expanded the three main patterns with relevant details\r\n- Added in-depth discussion of the limitations of Service Workers\r\n- Updated refresh token example (made lifetimes more relevant, clarified that the session is needed instead of the user presence)\r\n- Revisited and expanded the Token Storage section\r\n- Fixed inconsistent capitalization (authorization/resource server, Authorization Code flow)\r\n- Added references",
       "createdAt": "2023-09-01T07:13:07Z",
-      "updatedAt": "2023-10-13T18:05:04Z",
+      "updatedAt": "2023-10-15T08:41:13Z",
       "baseRepository": "oauth-wg/oauth-browser-based-apps",
       "baseRefName": "main",
       "baseRefOid": "ab2b41cc24802e3bc575bd8a738dd85bd799adc4",
       "headRepository": "philippederyck/OAUTHWG-oauth-browser-based-apps",
       "headRefName": "pdr/threat-malicious-js",
-      "headRefOid": "b00130c4326cbd92263e8c3bc911f96962647823",
+      "headRefOid": "7dd3bc5c6f0b0d2abe424b91711df97e342084d3",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -1530,6 +1530,26 @@
               "body": "Added in new commit",
               "createdAt": "2023-09-15T16:01:21Z",
               "updatedAt": "2023-09-15T16:01:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOCUe3lM5kDt6Z",
+          "commit": {
+            "abbreviatedOid": "b00130c"
+          },
+          "author": "philippederyck",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-15T06:38:24Z",
+          "updatedAt": "2023-10-15T06:38:24Z",
+          "comments": [
+            {
+              "originalPosition": 69,
+              "body": "The last sentence already covers this case: `Additionally, authorization server behavior that would force every authorization code flow to require user interaction would significantly impact widely-established patterns, such as silently bootstrapping an application with tokens, or Single Sign-On across multiple related applications.`. I have not changed this, but if you feel it warrants more explanation, we should look into that when finetuning everything.",
+              "createdAt": "2023-10-15T06:38:24Z",
+              "updatedAt": "2023-10-15T06:38:25Z"
             }
           ]
         }
