@@ -1671,7 +1671,7 @@ extension (described in <a href="#pattern-bff-flow" class="auto internal xref">S
             <h5 id="name-combining-oauth-and-openid-">
 <a href="#section-6.1.2.3" class="section-number selfRef">6.1.2.3. </a><a href="#name-combining-oauth-and-openid-" class="section-name selfRef">Combining OAuth and OpenID Connect</a>
             </h5>
-<p id="section-6.1.2.3-1">The OAuth flow used by this application architecture can be combined with OpenID Connect by including the proper scopes in the authorization request (C). In that case, the BFF will receive an identity token in step F. The BFF can associate the information from the identity token with the user's session and provide it to the JavaScript application in step B or I.<a href="#section-6.1.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.2.3-1">The OAuth flow used by this application architecture can be combined with OpenID Connect by including the proper scopes in the authorization request (C). In that case, the BFF will receive an ID Token in step F. The BFF can associate the information from the ID Token with the user's session and provide it to the JavaScript application in step B or I.<a href="#section-6.1.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.1.2.3-2">When needed, the BFF can use the access token associated with the user's session to make requests to the UserInfo endpoint.<a href="#section-6.1.2.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2876,7 +2876,7 @@ as described in this document.<a href="#section-7.3-2" class="pilcrow">¶</a></p
             <p id="section-9.1-2.3.1">Use <span>[<a href="#RFC8707" class="cite xref">RFC8707</a>]</span> to restrict access tokens to a single resource<a href="#section-9.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-9.1-3">When OpenID Connect is used, it is important to avoid sensitive information disclosure through the claims in the identity token. The authorization server SHOULD NOT include any ID token claims that aren't used by the client.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
+<p id="section-9.1-3">When OpenID Connect is used, it is important to avoid sensitive information disclosure through the claims in the ID Token. The authorization server SHOULD NOT include any ID token claims that aren't used by the client.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sender-constrained-tokens">
