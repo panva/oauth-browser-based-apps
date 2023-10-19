@@ -67,7 +67,7 @@ Table of Contents
    1.  Introduction
    2.  Notational Conventions
    3.  Terminology
-   4.  OAuth 2.0 in Browser-Based Applications
+   4.  History of OAuth 2.0 in Browser-Based Applications
    5.  The Threat of Malicious JavaScript
      5.1.  Malicious JavaScript Payloads
        5.1.1.  Single-Execution Token Theft
@@ -179,7 +179,7 @@ Table of Contents
    recommendations and considerations herein also apply to other
    languages that execute code in the browser, such as Web Assembly.
 
-4.  OAuth 2.0 in Browser-Based Applications
+4.  History of OAuth 2.0 in Browser-Based Applications
 
    At the time that OAuth 2.0 [RFC6749] and [RFC6750] were created,
    browser-based JavaScript applications needed a solution that strictly
@@ -267,10 +267,16 @@ Table of Contents
 
    This scenario covers a simple token exfiltration attack, where the
    attacker obtains and exfiltrates the client's current tokens.  This
-   scenario consists of the following steps: - Execute malicious JS code
-   - Obtain tokens from the application's preferred storage mechanism
-   (See Section 8) - Send the tokens to a server controlled by the
-   attacker - Store/abuse the stolen tokens
+   scenario consists of the following steps:
+
+   *  Execute malicious JS code
+
+   *  Obtain tokens from the application's preferred storage mechanism
+      (See Section 8)
+
+   *  Send the tokens to a server controlled by the attacker
+
+   *  Store/abuse the stolen tokens
 
    The recommended defensive strategy to protect access tokens is to
    reduce the scope and lifetime of the token.  For refresh tokens, the
@@ -289,12 +295,17 @@ Table of Contents
    immediately stealing tokens upon the execution of the payload, the
    attacker sets up the necessary handlers to steal the application's
    tokens on a continuous basis.  This scenario consists of the
-   following steps: - Execute malicious JS code - Setup a continuous
-   token theft mechanism (e.g., on a 10-second time interval) - Obtain
-   tokens from the application's preferred storage mechanism (See
-   Section 8) - Send the tokens to a server controlled by the attacker -
-   Store the tokens - Wait until the opportune moment to abuse the
-   latest version of the stolen tokens
+   following steps:
+
+   *  Execute malicious JS code
+
+   *  Setup a continuous token theft mechanism (e.g., on a 10-second
+      time interval) - Obtain tokens from the application's preferred
+      storage mechanism (See Section 8) - Send the tokens to a server
+      controlled by the attacker - Store the tokens
+
+   *  Wait until the opportune moment to abuse the latest version of the
+      stolen tokens
 
    The crucial difference in this scenario is that the attacker always
    has access to the latest tokens used by the application.  This slight
@@ -319,17 +330,26 @@ Table of Contents
    hidden iframe and launch a silent Authorization Code flow.  This
    silent flow will reuse the user's existing session with the
    authorization server and result in the issuing of a new, independent
-   set of tokens.  This scenario consists of the following steps: -
-   Execute malicious JS code - Setup a handler to obtain the
-   authorization code from the iframe (e.g., by monitoring the frame's
-   URL or via Web Messaging) - Insert a hidden iframe into the page and
-   initialize it with an authorization request.  The authorization
-   request in the iframe will occur within the user's session and, when
-   the session is still active, result in the issuing of an
-   authorization code. - Extract the authorization code from the iframe
-   using the previously installed handler - Send the authorization code
-   to a server controlled by the attacker - Exchange the authorization
-   code for a new set of tokens - Abuse the stolen tokens
+   set of tokens.  This scenario consists of the following steps:
+
+   *  Execute malicious JS code
+
+   *  Setup a handler to obtain the authorization code from the iframe
+      (e.g., by monitoring the frame's URL or via Web Messaging)
+
+   *  Insert a hidden iframe into the page and initialize it with an
+      authorization request.  The authorization request in the iframe
+      will occur within the user's session and, when the session is
+      still active, result in the issuing of an authorization code.
+
+   *  Extract the authorization code from the iframe using the
+      previously installed handler
+
+   *  Send the authorization code to a server controlled by the attacker
+
+   *  Exchange the authorization code for a new set of tokens
+
+   *  Abuse the stolen tokens
 
    The most important takeaway from this scenario is that it runs a new
    OAuth flow instead of focusing on stealing existing tokens.  In
@@ -367,8 +387,11 @@ Table of Contents
    directly from within the OAuth client application running in the
    user's browser.  The requests sent by the attacker are
    indistinguishable from requests sent by the legitimate application.
-   This scenario consists of the following steps: - Execute malicious JS
-   code - Send a request to a resource server and process the response
+   This scenario consists of the following steps:
+
+   *  Execute malicious JS code
+
+   *  Send a request to a resource server and process the response
 
    To authorize the requests to the resource server, the attacker simply
    mimics the behavior of the client application.  For example, when a
@@ -484,12 +507,17 @@ Table of Contents
    This section describes the architecture of a JavaScript application
    that relies on a backend component to handle all OAuth
    responsibilities and API interactions.  The BFF has three core
-   responsibilities: 1.  The BFF interacts as a confidential OAuth
-   client with the authorization server 2.  The BFF manages OAuth access
-   and refresh tokens, making them inaccessible by the JavaScript
-   application 3.  The BFF proxies all requests to a resource server,
-   augmenting them with the correct access token before forwarding them
-   to the resource server
+   responsibilities:
+
+   1.  The BFF interacts as a confidential OAuth client with the
+       authorization server
+
+   2.  The BFF manages OAuth access and refresh tokens, making them
+       inaccessible by the JavaScript application
+
+   3.  The BFF proxies all requests to a resource server, augmenting
+       them with the correct access token before forwarding them to the
+       resource server
 
    If an attacker is able to execute malicious code within the
    JavaScript application, the application architecture is able to
@@ -667,12 +695,20 @@ Table of Contents
    cookies, they must be properly protected.
 
    The following cookie security guidelines are relevant for this
-   particular BFF architecture: - The BFF MUST enable the _Secure_ flag
-   for its cookies - The BFF MUST enable the _HttpOnly_ flag for its
-   cookies - The BFF SHOULD enable the _SameSite=Strict_ flag for its
-   cookies - The BFF SHOULD set its cookie path to _/_ - The BFF SHOULD
-   NOT set the _Domain_ attribute for cookies - The BFF SHOULD start the
-   name of its cookies with the ___Host-_ prefix ([CookiePrefixes])
+   particular BFF architecture:
+
+   *  The BFF MUST enable the _Secure_ flag for its cookies
+
+   *  The BFF MUST enable the _HttpOnly_ flag for its cookies
+
+   *  The BFF SHOULD enable the _SameSite=Strict_ flag for its cookies
+
+   *  The BFF SHOULD set its cookie path to _/_
+
+   *  The BFF SHOULD NOT set the _Domain_ attribute for cookies
+
+   *  The BFF SHOULD start the name of its cookies with the ___Host-_
+      prefix ([CookiePrefixes])
 
    Additionally, the BFF SHOULD encrypt its cookie contents, to ensure
    that tokens stored in cookies are never written to disk in plaintext
@@ -782,11 +818,13 @@ Table of Contents
 
    If the attacker has the ability to execute malicious JavaScript code
    in the application's execution context, the following payloads become
-   relevant attack scenarios: * Proxying Requests via the User's Browser
-   (See Section 5.1.4)
+   relevant attack scenarios:
+
+   *  Proxying Requests via the User's Browser (See Section 5.1.4)
 
    Note that this attack scenario results in the following consequences:
-   * Client Hijacking (See Section 5.2.3)
+
+   *  Client Hijacking (See Section 5.2.3)
 
    Unfortunately, client hijacking is an attack scenario that is
    inherent to the nature of browser-based applications.  As a result,
@@ -806,9 +844,13 @@ Table of Contents
 6.1.4.2.  Mitigated Attack Scenarios
 
    The other payloads, listed below, are effectively mitigated by the
-   BFF application architecture: * Single-Execution Token Theft (See
-   Section 5.1.1) * Persistent Token Theft (See Section 5.1.2) *
-   Acquisition and Extraction of New Tokens (See Section 5.1.3)
+   BFF application architecture:
+
+   *  Single-Execution Token Theft (See Section 5.1.1)
+
+   *  Persistent Token Theft (See Section 5.1.2)
+
+   *  Acquisition and Extraction of New Tokens (See Section 5.1.3)
 
    The BFF counters the first two payloads by not exposing any tokens to
    the browser-based application.  Even when the attacker gains full
@@ -823,9 +865,11 @@ Table of Contents
    prevents other attacks against the authorization code.
 
    Because of the nature of the BFF, the following two consequences of
-   potential attacks become irrelevant: * Exploiting Stolen Refresh
-   Tokens (See Section 5.2.1) * Exploiting Stolen Access Tokens (See
-   Section 5.2.2)
+   potential attacks become irrelevant:
+
+   *  Exploiting Stolen Refresh Tokens (See Section 5.2.1)
+
+   *  Exploiting Stolen Access Tokens (See Section 5.2.2)
 
 6.1.4.3.  Summary
 
@@ -1057,14 +1101,19 @@ Table of Contents
 
    If the attacker has the ability to execute malicious JavaScript code
    in the application's execution context, the following payloads become
-   relevant attack scenarios: * Single-Execution Token Theft (See
-   Section 5.1.1) for access tokens * Persistent Token Theft (See
-   Section 5.1.2) for access tokens * Proxying Requests via the User's
-   Browser (See Section 5.1.4)
+   relevant attack scenarios:
+
+   *  Single-Execution Token Theft (See Section 5.1.1) for access tokens
+
+   *  Persistent Token Theft (See Section 5.1.2) for access tokens
+
+   *  Proxying Requests via the User's Browser (See Section 5.1.4)
 
    Note that this attack scenario results in the following consequences:
-   * Exploiting Stolen Access Tokens (See Section 5.2.2) * Client
-   Hijacking (See Section 5.2.3)
+
+   *  Exploiting Stolen Access Tokens (See Section 5.2.2)
+
+   *  Client Hijacking (See Section 5.2.3)
 
    Exposing the access token to the JavaScript application is the core
    idea behind the architecture pattern of the token-mediating backend.
@@ -1074,10 +1123,14 @@ Table of Contents
 6.2.4.2.  Mitigated Attack Scenarios
 
    The other payloads, listed below, are effectively mitigated by the
-   BFF application architecture: * Single-Execution Token Theft (See
-   Section 5.1.1) for refresh tokens * Persistent Token Theft (See
-   Section 5.1.2) for refresh tokens * Acquisition and Extraction of New
-   Tokens (See Section 5.1.3)
+   BFF application architecture:
+
+   *  Single-Execution Token Theft (See Section 5.1.1) for refresh
+      tokens
+
+   *  Persistent Token Theft (See Section 5.1.2) for refresh tokens
+
+   *  Acquisition and Extraction of New Tokens (See Section 5.1.3)
 
    The token-mediating backend counters the first two payloads by not
    exposing the refresh token to the browser-based application.  Even
@@ -1092,8 +1145,9 @@ Table of Contents
    PKCE prevents other attacks against the authorization code.
 
    Because of the nature of the token-mediating backend, the following
-   consequences of potential attacks become irrelevant: * Exploiting
-   Stolen Refresh Tokens (See Section 5.2.1)
+   consequences of potential attacks become irrelevant:
+
+   *  Exploiting Stolen Refresh Tokens (See Section 5.2.1)
 
 6.2.4.3.  Additional Defenses
 
@@ -1449,10 +1503,15 @@ Table of Contents
 
    If the attacker has the ability to execute malicious JavaScript code
    in the application's execution context, the following payloads become
-   relevant attack scenarios: * Single-Execution Token Theft (See
-   Section 5.1.1) * Persistent Token Theft (See Section 5.1.2) *
-   Acquisition and Extraction of New Tokens (See Section 5.1.3) *
-   Proxying Requests via the User's Browser (See Section 5.1.4)
+   relevant attack scenarios:
+
+   *  Single-Execution Token Theft (See Section 5.1.1)
+
+   *  Persistent Token Theft (See Section 5.1.2)
+
+   *  Acquisition and Extraction of New Tokens (See Section 5.1.3)
+
+   *  Proxying Requests via the User's Browser (See Section 5.1.4)
 
    The most dangerous payload is the acquisition and extraction of new
    tokens.  In this attack scenario, the attacker only interacts with
@@ -1463,9 +1522,13 @@ Table of Contents
    able to obtain tokens from the authorization server.
 
    Note that these attack scenarios result in the following
-   consequences: * Exploiting Stolen Refresh Tokens (See Section 5.2.1)
-   * Exploiting Stolen Access Tokens (See Section 5.2.2) * Client
-   Hijacking (See Section 5.2.3)
+   consequences:
+
+   *  Exploiting Stolen Refresh Tokens (See Section 5.2.1)
+
+   *  Exploiting Stolen Access Tokens (See Section 5.2.2)
+
+   *  Client Hijacking (See Section 5.2.3)
 
 6.3.3.2.  Additional Defenses
 
@@ -2121,10 +2184,14 @@ Table of Contents
    the authority associated with access tokens.  This best practice is
    applicable to all the architectures discussed in this specification.
    Concretely, the following considerations can be helpful in reducing
-   the authority of access tokens: * Reduce the lifetime of access
-   tokens and rely on refresh tokens for straightforward access token
-   renewal * Reduce the scopes or permissions associated with the access
-   token * Use [RFC8707] to restrict access tokens to a single resource
+   the authority of access tokens:
+
+   *  Reduce the lifetime of access tokens and rely on refresh tokens
+      for straightforward access token renewal
+
+   *  Reduce the scopes or permissions associated with the access token
+
+   *  Use [RFC8707] to restrict access tokens to a single resource
 
    When OpenID Connect is used, it is important to avoid sensitive
    information disclosure through the claims in the identity token.  The

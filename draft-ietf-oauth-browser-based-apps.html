@@ -1143,7 +1143,7 @@ taken into account when developing browser-based applications that use OAuth 2.0
             <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-oauth-20-in-browser-based-a" class="internal xref">OAuth 2.0 in Browser-Based Applications</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-history-of-oauth-20-in-brow" class="internal xref">History of OAuth 2.0 in Browser-Based Applications</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-the-threat-of-malicious-jav" class="internal xref">The Threat of Malicious JavaScript</a></p>
@@ -1395,10 +1395,10 @@ usually written in JavaScript. Also sometimes referred to as a "single-page appl
 <p id="section-3-3">While this document often refers to "JavaScript apps", this is not intended to be exclusive to the JavaScript language. The recommendations and considerations herein also apply to other languages that execute code in the browser, such as Web Assembly.<a href="#section-3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="oauth-20-in-browser-based-applications">
+<div id="history-of-oauth-20-in-browser-based-applications">
 <section id="section-4">
-      <h2 id="name-oauth-20-in-browser-based-a">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-oauth-20-in-browser-based-a" class="section-name selfRef">OAuth 2.0 in Browser-Based Applications</a>
+      <h2 id="name-history-of-oauth-20-in-brow">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-history-of-oauth-20-in-brow" class="section-name selfRef">History of OAuth 2.0 in Browser-Based Applications</a>
       </h2>
 <p id="section-4-1">At the time that OAuth 2.0 <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> and <span>[<a href="#RFC6750" class="cite xref">RFC6750</a>]</span> were created, browser-based JavaScript applications needed a solution that strictly complied with the same-origin policy. Common deployments of OAuth 2.0 involved an application running on a different domain than the authorization server, so it was historically not possible to use the Authorization Code flow which would require a cross-origin POST request. This was one of the motivations for the definition of the Implicit flow, which returns the access token in the front channel via the fragment part of the URL, bypassing the need for a cross-origin POST request.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">However, there are several drawbacks to the Implicit flow, generally involving vulnerabilities associated with the exposure of the access token in the URL. See <a href="#implicit_flow" class="auto internal xref">Section 7.2</a> for an analysis of these attacks and the drawbacks of using the Implicit flow in browsers. Additional attacks and security considerations can be found in <span>[<a href="#oauth-security-topics" class="cite xref">oauth-security-topics</a>]</span>.<a href="#section-4-2" class="pilcrow">¶</a></p>
@@ -1426,13 +1426,23 @@ usually written in JavaScript. Also sometimes referred to as a "single-page appl
           <h4 id="name-single-execution-token-thef">
 <a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-single-execution-token-thef" class="section-name selfRef">Single-Execution Token Theft</a>
           </h4>
-<p id="section-5.1.1-1">This scenario covers a simple token exfiltration attack, where the attacker obtains and exfiltrates the client's current tokens. This scenario consists of the following steps:
-- Execute malicious JS code
-- Obtain tokens from the application's preferred storage mechanism (See <a href="#token-storage" class="auto internal xref">Section 8</a>)
-- Send the tokens to a server controlled by the attacker
-- Store/abuse the stolen tokens<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-2">The recommended defensive strategy to protect access tokens is to reduce the scope and lifetime of the token. For refresh tokens, the use of refresh token rotation offers a detection and correction mechanism.<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-3">Finally, note that this attack scenario is trivial and often used to illustrate the dangers of malicious JavaScript. Unfortunately, it significantly underestimates the capabilities of a sophisticated and motivated attacker.<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-1">This scenario covers a simple token exfiltration attack, where the attacker obtains and exfiltrates the client's current tokens. This scenario consists of the following steps:<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1.1-2.1">
+              <p id="section-5.1.1-2.1.1">Execute malicious JS code<a href="#section-5.1.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.1-2.2">
+              <p id="section-5.1.1-2.2.1">Obtain tokens from the application's preferred storage mechanism (See <a href="#token-storage" class="auto internal xref">Section 8</a>)<a href="#section-5.1.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.1-2.3">
+              <p id="section-5.1.1-2.3.1">Send the tokens to a server controlled by the attacker<a href="#section-5.1.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.1-2.4">
+              <p id="section-5.1.1-2.4.1">Store/abuse the stolen tokens<a href="#section-5.1.1-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-5.1.1-3">The recommended defensive strategy to protect access tokens is to reduce the scope and lifetime of the token. For refresh tokens, the use of refresh token rotation offers a detection and correction mechanism.<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-4">Finally, note that this attack scenario is trivial and often used to illustrate the dangers of malicious JavaScript. Unfortunately, it significantly underestimates the capabilities of a sophisticated and motivated attacker.<a href="#section-5.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="payload-persistent-theft">
@@ -1440,15 +1450,23 @@ usually written in JavaScript. Also sometimes referred to as a "single-page appl
           <h4 id="name-persistent-token-theft">
 <a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-persistent-token-theft" class="section-name selfRef">Persistent Token Theft</a>
           </h4>
-<p id="section-5.1.2-1">This attack scenario is a more advanced variation on the Single-Execution Token Theft scenario (<a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a>). Instead of immediately stealing tokens upon the execution of the payload, the attacker sets up the necessary handlers to steal the application's tokens on a continuous basis. This scenario consists of the following steps:
-- Execute malicious JS code
-- Setup a continuous token theft mechanism (e.g., on a 10-second time interval)
-        - Obtain tokens from the application's preferred storage mechanism (See <a href="#token-storage" class="auto internal xref">Section 8</a>)
-        - Send the tokens to a server controlled by the attacker
-        - Store the tokens
-- Wait until the opportune moment to abuse the latest version of the stolen tokens<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.2-2">The crucial difference in this scenario is that the attacker always has access to the latest tokens used by the application. This slight variation in the payload already suffices to counter typical defenses against token theft, such as short lifetimes or refresh token rotation.<a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.2-3">For access tokens, the attacker now obtains the latest access token for as long as the user's browser is online. For refresh tokens, the implication is that refresh token rotation is not sufficient to prevent abuse of a refresh token. An attacker can easily wait until the user closes the application or their browser goes offline before using the latest refresh token, thereby ensuring that the latest refresh token is not reused.<a href="#section-5.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-1">This attack scenario is a more advanced variation on the Single-Execution Token Theft scenario (<a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a>). Instead of immediately stealing tokens upon the execution of the payload, the attacker sets up the necessary handlers to steal the application's tokens on a continuous basis. This scenario consists of the following steps:<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1.2-2.1">
+              <p id="section-5.1.2-2.1.1">Execute malicious JS code<a href="#section-5.1.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.2-2.2">
+              <p id="section-5.1.2-2.2.1">Setup a continuous token theft mechanism (e.g., on a 10-second time interval)
+      - Obtain tokens from the application's preferred storage mechanism (See <a href="#token-storage" class="auto internal xref">Section 8</a>)
+      - Send the tokens to a server controlled by the attacker
+      - Store the tokens<a href="#section-5.1.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.2-2.3">
+              <p id="section-5.1.2-2.3.1">Wait until the opportune moment to abuse the latest version of the stolen tokens<a href="#section-5.1.2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-5.1.2-3">The crucial difference in this scenario is that the attacker always has access to the latest tokens used by the application. This slight variation in the payload already suffices to counter typical defenses against token theft, such as short lifetimes or refresh token rotation.<a href="#section-5.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-4">For access tokens, the attacker now obtains the latest access token for as long as the user's browser is online. For refresh tokens, the implication is that refresh token rotation is not sufficient to prevent abuse of a refresh token. An attacker can easily wait until the user closes the application or their browser goes offline before using the latest refresh token, thereby ensuring that the latest refresh token is not reused.<a href="#section-5.1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="payload-new-flow">
@@ -1456,17 +1474,33 @@ usually written in JavaScript. Also sometimes referred to as a "single-page appl
           <h4 id="name-acquisition-and-extraction-">
 <a href="#section-5.1.3" class="section-number selfRef">5.1.3. </a><a href="#name-acquisition-and-extraction-" class="section-name selfRef">Acquisition and Extraction of New Tokens</a>
           </h4>
-<p id="section-5.1.3-1">In this advanced attack scenario, the attacker completely disregards any tokens that the application has already obtained. Instead, the attacker takes advantage of the ability to run malicious code in the application's origin. With that ability, the attacker can inject a hidden iframe and launch a silent Authorization Code flow. This silent flow will reuse the user's existing session with the authorization server and result in the issuing of a new, independent set of tokens. This scenario consists of the following steps:
-- Execute malicious JS code
-- Setup a handler to obtain the authorization code from the iframe (e.g., by monitoring the frame's URL or via Web Messaging)
-- Insert a hidden iframe into the page and initialize it with an authorization request. The authorization request in the iframe will occur within the user's session and, when the session is still active, result in the issuing of an authorization code.
-- Extract the authorization code from the iframe using the previously installed handler
-- Send the authorization code to a server controlled by the attacker
-- Exchange the authorization code for a new set of tokens
-- Abuse the stolen tokens<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.3-2">The most important takeaway from this scenario is that it runs a new OAuth flow instead of focusing on stealing existing tokens. In essence, even if the application finds a token storage mechanism with perfect security, the attacker will still be able to request a new set of tokens.<a href="#section-5.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.3-3">This attack scenario is possible because the security of public browser-based OAuth 2.0 clients relies entirely on the redirect URI and application's origin. When the attacker can execute malicious JavaScript code in the application's execution context, they effectively control the application's origin, and by extension, the redirect URI. This attack scenario uses a silent iframe-based flow, which is the same mechanism most browser-based apps use to bootstrap their authentication state. Since the attacker controls the application in the browser, the attacker's Authorization Code flow is indistinguishable from a legitimate Authorization Code flow.<a href="#section-5.1.3-3" class="pilcrow">¶</a></p>
-<p id="section-5.1.3-4">There are no practical security mechanisms for frontend applications that counter this attack scenario. Short access token lifetimes and refresh token rotation are ineffective, since the attacker has a fresh, independent set of tokens. Advanced security mechanism, such as DPoP (<span>[<a href="#DPoP" class="cite xref">DPoP</a>]</span>) are equally ineffective, since the attacker can use their own key pair to setup and use DPoP for the newly obtained tokens. Additionally, authorization server behavior that would force every Authorization Code flow to require user interaction would significantly impact widely-established patterns, such as silently bootstrapping an application with tokens, or Single Sign-On across multiple related applications.<a href="#section-5.1.3-4" class="pilcrow">¶</a></p>
+<p id="section-5.1.3-1">In this advanced attack scenario, the attacker completely disregards any tokens that the application has already obtained. Instead, the attacker takes advantage of the ability to run malicious code in the application's origin. With that ability, the attacker can inject a hidden iframe and launch a silent Authorization Code flow. This silent flow will reuse the user's existing session with the authorization server and result in the issuing of a new, independent set of tokens. This scenario consists of the following steps:<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1.3-2.1">
+              <p id="section-5.1.3-2.1.1">Execute malicious JS code<a href="#section-5.1.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.3-2.2">
+              <p id="section-5.1.3-2.2.1">Setup a handler to obtain the authorization code from the iframe (e.g., by monitoring the frame's URL or via Web Messaging)<a href="#section-5.1.3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.3-2.3">
+              <p id="section-5.1.3-2.3.1">Insert a hidden iframe into the page and initialize it with an authorization request. The authorization request in the iframe will occur within the user's session and, when the session is still active, result in the issuing of an authorization code.<a href="#section-5.1.3-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.3-2.4">
+              <p id="section-5.1.3-2.4.1">Extract the authorization code from the iframe using the previously installed handler<a href="#section-5.1.3-2.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.3-2.5">
+              <p id="section-5.1.3-2.5.1">Send the authorization code to a server controlled by the attacker<a href="#section-5.1.3-2.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.3-2.6">
+              <p id="section-5.1.3-2.6.1">Exchange the authorization code for a new set of tokens<a href="#section-5.1.3-2.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.3-2.7">
+              <p id="section-5.1.3-2.7.1">Abuse the stolen tokens<a href="#section-5.1.3-2.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-5.1.3-3">The most important takeaway from this scenario is that it runs a new OAuth flow instead of focusing on stealing existing tokens. In essence, even if the application finds a token storage mechanism with perfect security, the attacker will still be able to request a new set of tokens.<a href="#section-5.1.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.1.3-4">This attack scenario is possible because the security of public browser-based OAuth 2.0 clients relies entirely on the redirect URI and application's origin. When the attacker can execute malicious JavaScript code in the application's execution context, they effectively control the application's origin, and by extension, the redirect URI. This attack scenario uses a silent iframe-based flow, which is the same mechanism most browser-based apps use to bootstrap their authentication state. Since the attacker controls the application in the browser, the attacker's Authorization Code flow is indistinguishable from a legitimate Authorization Code flow.<a href="#section-5.1.3-4" class="pilcrow">¶</a></p>
+<p id="section-5.1.3-5">There are no practical security mechanisms for frontend applications that counter this attack scenario. Short access token lifetimes and refresh token rotation are ineffective, since the attacker has a fresh, independent set of tokens. Advanced security mechanism, such as DPoP (<span>[<a href="#DPoP" class="cite xref">DPoP</a>]</span>) are equally ineffective, since the attacker can use their own key pair to setup and use DPoP for the newly obtained tokens. Additionally, authorization server behavior that would force every Authorization Code flow to require user interaction would significantly impact widely-established patterns, such as silently bootstrapping an application with tokens, or Single Sign-On across multiple related applications.<a href="#section-5.1.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="payload-proxy">
@@ -1474,11 +1508,17 @@ usually written in JavaScript. Also sometimes referred to as a "single-page appl
           <h4 id="name-proxying-requests-via-the-u">
 <a href="#section-5.1.4" class="section-number selfRef">5.1.4. </a><a href="#name-proxying-requests-via-the-u" class="section-name selfRef">Proxying Requests via the User's Browser</a>
           </h4>
-<p id="section-5.1.4-1">This attack scenario takes a different approach. Instead of abusing the application to obtain tokens, the attacker will send requests directly from within the OAuth client application running in the user's browser. The requests sent by the attacker are indistinguishable from requests sent by the legitimate application. This scenario consists of the following steps:
-- Execute malicious JS code
-- Send a request to a resource server and process the response<a href="#section-5.1.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.4-2">To authorize the requests to the resource server, the attacker simply mimics the behavior of the client application. For example, when a client application programmatically attaches an access token to outgoing requests, the attacker does the same. Should the client application rely on an external component to augment the request with the proper access token, then this external component will also augment the attacker's request.<a href="#section-5.1.4-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.4-3">This attack pattern is well-known and also occurs with traditional applications using HttpOnly session cookies. It is commonly accepted that this scenario cannot be stopped or prevented by application-level security measures. For example, the DPoP specification (<span>[<a href="#DPoP" class="cite xref">DPoP</a>]</span>) explicitly considers this attack scenario to be out of scope.<a href="#section-5.1.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.1.4-1">This attack scenario takes a different approach. Instead of abusing the application to obtain tokens, the attacker will send requests directly from within the OAuth client application running in the user's browser. The requests sent by the attacker are indistinguishable from requests sent by the legitimate application. This scenario consists of the following steps:<a href="#section-5.1.4-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1.4-2.1">
+              <p id="section-5.1.4-2.1.1">Execute malicious JS code<a href="#section-5.1.4-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.4-2.2">
+              <p id="section-5.1.4-2.2.1">Send a request to a resource server and process the response<a href="#section-5.1.4-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-5.1.4-3">To authorize the requests to the resource server, the attacker simply mimics the behavior of the client application. For example, when a client application programmatically attaches an access token to outgoing requests, the attacker does the same. Should the client application rely on an external component to augment the request with the proper access token, then this external component will also augment the attacker's request.<a href="#section-5.1.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.1.4-4">This attack pattern is well-known and also occurs with traditional applications using HttpOnly session cookies. It is commonly accepted that this scenario cannot be stopped or prevented by application-level security measures. For example, the DPoP specification (<span>[<a href="#DPoP" class="cite xref">DPoP</a>]</span>) explicitly considers this attack scenario to be out of scope.<a href="#section-5.1.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1545,11 +1585,19 @@ usually written in JavaScript. Also sometimes referred to as a "single-page appl
         <h3 id="name-backend-for-frontend-bff">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-backend-for-frontend-bff" class="section-name selfRef">Backend For Frontend (BFF)</a>
         </h3>
-<p id="section-6.1-1">This section describes the architecture of a JavaScript application that relies on a backend component to handle all OAuth responsibilities and API interactions. The BFF has three core responsibilities:
-1. The BFF interacts as a confidential OAuth client with the authorization server
-2. The BFF manages OAuth access and refresh tokens, making them inaccessible by the JavaScript application
-3. The BFF proxies all requests to a resource server, augmenting them with the correct access token before forwarding them to the resource server<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2">If an attacker is able to execute malicious code within the JavaScript application, the application architecture is able to withstand most of the payload scenarios discussed before. Since tokens are only available to the BFF, there are no tokens available to extract from JavaScript (Payload <a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a> and <a href="#payload-persistent-theft" class="auto internal xref">Section 5.1.2</a>). The BFF is a confidential client, which prevents the attacker from running a new flow within the browser (Payload <a href="#payload-new-flow" class="auto internal xref">Section 5.1.3</a>). Since the malicious JavaScript code still runs within the application's execution context, the attacker is able to send requests to the BFF from within the user's browser (Payload <a href="#payload-proxy" class="auto internal xref">Section 5.1.4</a>).<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">This section describes the architecture of a JavaScript application that relies on a backend component to handle all OAuth responsibilities and API interactions. The BFF has three core responsibilities:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-6.1-2">
+<li id="section-6.1-2.1">
+            <p id="section-6.1-2.1.1">The BFF interacts as a confidential OAuth client with the authorization server<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-6.1-2.2">
+            <p id="section-6.1-2.2.1">The BFF manages OAuth access and refresh tokens, making them inaccessible by the JavaScript application<a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-6.1-2.3">
+            <p id="section-6.1-2.3.1">The BFF proxies all requests to a resource server, augmenting them with the correct access token before forwarding them to the resource server<a href="#section-6.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+<p id="section-6.1-3">If an attacker is able to execute malicious code within the JavaScript application, the application architecture is able to withstand most of the payload scenarios discussed before. Since tokens are only available to the BFF, there are no tokens available to extract from JavaScript (Payload <a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a> and <a href="#payload-persistent-theft" class="auto internal xref">Section 5.1.2</a>). The BFF is a confidential client, which prevents the attacker from running a new flow within the browser (Payload <a href="#payload-new-flow" class="auto internal xref">Section 5.1.3</a>). Since the malicious JavaScript code still runs within the application's execution context, the attacker is able to send requests to the BFF from within the user's browser (Payload <a href="#payload-proxy" class="auto internal xref">Section 5.1.4</a>).<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 <div id="application-architecture">
 <section id="section-6.1.1">
           <h4 id="name-application-architecture">
@@ -1657,15 +1705,29 @@ extension (described in <a href="#pattern-bff-flow" class="auto internal xref">S
 <a href="#section-6.1.3.2" class="section-number selfRef">6.1.3.2. </a><a href="#name-cookie-security" class="section-name selfRef">Cookie Security</a>
             </h5>
 <p id="section-6.1.3.2-1">The BFF uses cookies to create a user session, which is directly associated with the user's tokens, either through server-side or client-side session state. Given the sensitive nature of these cookies, they must be properly protected.<a href="#section-6.1.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.1.3.2-2">The following cookie security guidelines are relevant for this particular BFF architecture:
-- The BFF MUST enable the <em>Secure</em> flag for its cookies
-- The BFF MUST enable the <em>HttpOnly</em> flag for its cookies
-- The BFF SHOULD enable the <em>SameSite=Strict</em> flag for its cookies
-- The BFF SHOULD set its cookie path to <em>/</em>
-- The BFF SHOULD NOT set the <em>Domain</em> attribute for cookies
-- The BFF SHOULD start the name of its cookies with the <em>__Host-</em> prefix (<span>[<a href="#CookiePrefixes" class="cite xref">CookiePrefixes</a>]</span>)<a href="#section-6.1.3.2-2" class="pilcrow">¶</a></p>
-<p id="section-6.1.3.2-3">Additionally, the BFF SHOULD encrypt its cookie contents, to ensure that tokens stored in cookies are never written to disk in plaintext format. This security measure helps to ensure protect the access token against malware that actively scans the user's hard drive to extract sensitive browser artifacts, such as cookies and locally stored data (see <a href="#token-storage" class="auto internal xref">Section 8</a>).<a href="#section-6.1.3.2-3" class="pilcrow">¶</a></p>
-<p id="section-6.1.3.2-4">For further guidance on cookie security best practices, we refer to the OWASP Cheat Sheet series (<a href="https://cheatsheetseries.owasp.org">https://cheatsheetseries.owasp.org</a>).<a href="#section-6.1.3.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.3.2-2">The following cookie security guidelines are relevant for this particular BFF architecture:<a href="#section-6.1.3.2-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1.3.2-3.1">
+                <p id="section-6.1.3.2-3.1.1">The BFF MUST enable the <em>Secure</em> flag for its cookies<a href="#section-6.1.3.2-3.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.3.2-3.2">
+                <p id="section-6.1.3.2-3.2.1">The BFF MUST enable the <em>HttpOnly</em> flag for its cookies<a href="#section-6.1.3.2-3.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.3.2-3.3">
+                <p id="section-6.1.3.2-3.3.1">The BFF SHOULD enable the <em>SameSite=Strict</em> flag for its cookies<a href="#section-6.1.3.2-3.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.3.2-3.4">
+                <p id="section-6.1.3.2-3.4.1">The BFF SHOULD set its cookie path to <em>/</em><a href="#section-6.1.3.2-3.4.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.3.2-3.5">
+                <p id="section-6.1.3.2-3.5.1">The BFF SHOULD NOT set the <em>Domain</em> attribute for cookies<a href="#section-6.1.3.2-3.5.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.3.2-3.6">
+                <p id="section-6.1.3.2-3.6.1">The BFF SHOULD start the name of its cookies with the <em>__Host-</em> prefix (<span>[<a href="#CookiePrefixes" class="cite xref">CookiePrefixes</a>]</span>)<a href="#section-6.1.3.2-3.6.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-6.1.3.2-4">Additionally, the BFF SHOULD encrypt its cookie contents, to ensure that tokens stored in cookies are never written to disk in plaintext format. This security measure helps to ensure protect the access token against malware that actively scans the user's hard drive to extract sensitive browser artifacts, such as cookies and locally stored data (see <a href="#token-storage" class="auto internal xref">Section 8</a>).<a href="#section-6.1.3.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.3.2-5">For further guidance on cookie security best practices, we refer to the OWASP Cheat Sheet series (<a href="https://cheatsheetseries.owasp.org">https://cheatsheetseries.owasp.org</a>).<a href="#section-6.1.3.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="pattern-bff-csrf">
@@ -1722,12 +1784,20 @@ extension (described in <a href="#pattern-bff-flow" class="auto internal xref">S
             <h5 id="name-attack-payloads-and-consequ">
 <a href="#section-6.1.4.1" class="section-number selfRef">6.1.4.1. </a><a href="#name-attack-payloads-and-consequ" class="section-name selfRef">Attack Payloads and Consequences</a>
             </h5>
-<p id="section-6.1.4.1-1">If the attacker has the ability to execute malicious JavaScript code in the application's execution context, the following payloads become relevant attack scenarios:
-* Proxying Requests via the User's Browser (See <a href="#payload-proxy" class="auto internal xref">Section 5.1.4</a>)<a href="#section-6.1.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1.4.1-2">Note that this attack scenario results in the following consequences:
-* Client Hijacking (See <a href="#consequence-hijack" class="auto internal xref">Section 5.2.3</a>)<a href="#section-6.1.4.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.1.4.1-3">Unfortunately, client hijacking is an attack scenario that is inherent to the nature of browser-based applications. As a result, nothing will be able to prevent such attacks apart from stopping the execution of malicious JavaScript code in the first place. Techniques that can help to achieve this are following secure coding guidelines, code analysis, and deploying defense-in-depth mechanisms such as Content Security Policy (<span>[<a href="#CSP3" class="cite xref">CSP3</a>]</span>).<a href="#section-6.1.4.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.1.4.1-4">Finally, the BFF is uniquely placed to observe all traffic between the JavaScript application and the resource servers. If a high-security application would prefer to implement anomaly detection or rate limiting, such a BFF would be the ideal place to do so. Such restrictions can further help to mitigate the consequences of client hijacking.<a href="#section-6.1.4.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.4.1-1">If the attacker has the ability to execute malicious JavaScript code in the application's execution context, the following payloads become relevant attack scenarios:<a href="#section-6.1.4.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1.4.1-2.1">
+                <p id="section-6.1.4.1-2.1.1">Proxying Requests via the User's Browser (See <a href="#payload-proxy" class="auto internal xref">Section 5.1.4</a>)<a href="#section-6.1.4.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-6.1.4.1-3">Note that this attack scenario results in the following consequences:<a href="#section-6.1.4.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1.4.1-4.1">
+                <p id="section-6.1.4.1-4.1.1">Client Hijacking (See <a href="#consequence-hijack" class="auto internal xref">Section 5.2.3</a>)<a href="#section-6.1.4.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-6.1.4.1-5">Unfortunately, client hijacking is an attack scenario that is inherent to the nature of browser-based applications. As a result, nothing will be able to prevent such attacks apart from stopping the execution of malicious JavaScript code in the first place. Techniques that can help to achieve this are following secure coding guidelines, code analysis, and deploying defense-in-depth mechanisms such as Content Security Policy (<span>[<a href="#CSP3" class="cite xref">CSP3</a>]</span>).<a href="#section-6.1.4.1-5" class="pilcrow">¶</a></p>
+<p id="section-6.1.4.1-6">Finally, the BFF is uniquely placed to observe all traffic between the JavaScript application and the resource servers. If a high-security application would prefer to implement anomaly detection or rate limiting, such a BFF would be the ideal place to do so. Such restrictions can further help to mitigate the consequences of client hijacking.<a href="#section-6.1.4.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="mitigated-attack-scenarios">
@@ -1735,15 +1805,29 @@ extension (described in <a href="#pattern-bff-flow" class="auto internal xref">S
             <h5 id="name-mitigated-attack-scenarios">
 <a href="#section-6.1.4.2" class="section-number selfRef">6.1.4.2. </a><a href="#name-mitigated-attack-scenarios" class="section-name selfRef">Mitigated Attack Scenarios</a>
             </h5>
-<p id="section-6.1.4.2-1">The other payloads, listed below, are effectively mitigated by the BFF application architecture:
-* Single-Execution Token Theft (See <a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a>)
-* Persistent Token Theft (See <a href="#payload-persistent-theft" class="auto internal xref">Section 5.1.2</a>)
-* Acquisition and Extraction of New Tokens (See <a href="#payload-new-flow" class="auto internal xref">Section 5.1.3</a>)<a href="#section-6.1.4.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.1.4.2-2">The BFF counters the first two payloads by not exposing any tokens to the browser-based application. Even when the attacker gains full control over the JavaScript application, there are simply no tokens to be stolen.<a href="#section-6.1.4.2-2" class="pilcrow">¶</a></p>
-<p id="section-6.1.4.2-3">The third scenario, where the attacker obtains a fresh set of tokens by running a silent flow, is mitigated by making the BFF a confidential client. Even when the attacker manages to obtain an authorization code, they are prevented from exchanging this code due to the lack of client credentials.  Additionally, the use of PKCE prevents other attacks against the authorization code.<a href="#section-6.1.4.2-3" class="pilcrow">¶</a></p>
-<p id="section-6.1.4.2-4">Because of the nature of the BFF, the following two consequences of potential attacks become irrelevant:
-* Exploiting Stolen Refresh Tokens (See <a href="#consequence-rt" class="auto internal xref">Section 5.2.1</a>)
-* Exploiting Stolen Access Tokens (See <a href="#consequence-at" class="auto internal xref">Section 5.2.2</a>)<a href="#section-6.1.4.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.4.2-1">The other payloads, listed below, are effectively mitigated by the BFF application architecture:<a href="#section-6.1.4.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1.4.2-2.1">
+                <p id="section-6.1.4.2-2.1.1">Single-Execution Token Theft (See <a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a>)<a href="#section-6.1.4.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.4.2-2.2">
+                <p id="section-6.1.4.2-2.2.1">Persistent Token Theft (See <a href="#payload-persistent-theft" class="auto internal xref">Section 5.1.2</a>)<a href="#section-6.1.4.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.4.2-2.3">
+                <p id="section-6.1.4.2-2.3.1">Acquisition and Extraction of New Tokens (See <a href="#payload-new-flow" class="auto internal xref">Section 5.1.3</a>)<a href="#section-6.1.4.2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-6.1.4.2-3">The BFF counters the first two payloads by not exposing any tokens to the browser-based application. Even when the attacker gains full control over the JavaScript application, there are simply no tokens to be stolen.<a href="#section-6.1.4.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.1.4.2-4">The third scenario, where the attacker obtains a fresh set of tokens by running a silent flow, is mitigated by making the BFF a confidential client. Even when the attacker manages to obtain an authorization code, they are prevented from exchanging this code due to the lack of client credentials.  Additionally, the use of PKCE prevents other attacks against the authorization code.<a href="#section-6.1.4.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.4.2-5">Because of the nature of the BFF, the following two consequences of potential attacks become irrelevant:<a href="#section-6.1.4.2-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1.4.2-6.1">
+                <p id="section-6.1.4.2-6.1.1">Exploiting Stolen Refresh Tokens (See <a href="#consequence-rt" class="auto internal xref">Section 5.2.1</a>)<a href="#section-6.1.4.2-6.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.1.4.2-6.2">
+                <p id="section-6.1.4.2-6.2.1">Exploiting Stolen Access Tokens (See <a href="#consequence-at" class="auto internal xref">Section 5.2.2</a>)<a href="#section-6.1.4.2-6.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
 </section>
 </div>
 <div id="summary">
@@ -1913,14 +1997,28 @@ extension (described in <a href="#pattern-bff-flow" class="auto internal xref">S
             <h5 id="name-attack-payloads-and-conseque">
 <a href="#section-6.2.4.1" class="section-number selfRef">6.2.4.1. </a><a href="#name-attack-payloads-and-conseque" class="section-name selfRef">Attack Payloads and Consequences</a>
             </h5>
-<p id="section-6.2.4.1-1">If the attacker has the ability to execute malicious JavaScript code in the application's execution context, the following payloads become relevant attack scenarios:
-* Single-Execution Token Theft (See <a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a>) for access tokens
-* Persistent Token Theft (See <a href="#payload-persistent-theft" class="auto internal xref">Section 5.1.2</a>) for access tokens
-* Proxying Requests via the User's Browser (See <a href="#payload-proxy" class="auto internal xref">Section 5.1.4</a>)<a href="#section-6.2.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.2.4.1-2">Note that this attack scenario results in the following consequences:
-* Exploiting Stolen Access Tokens (See <a href="#consequence-at" class="auto internal xref">Section 5.2.2</a>)
-* Client Hijacking (See <a href="#consequence-hijack" class="auto internal xref">Section 5.2.3</a>)<a href="#section-6.2.4.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.2.4.1-3">Exposing the access token to the JavaScript application is the core idea behind the architecture pattern of the token-mediating backend. As a result, the access token becomes vulnerable to token theft by malicious JavaScript.<a href="#section-6.2.4.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.2.4.1-1">If the attacker has the ability to execute malicious JavaScript code in the application's execution context, the following payloads become relevant attack scenarios:<a href="#section-6.2.4.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.4.1-2.1">
+                <p id="section-6.2.4.1-2.1.1">Single-Execution Token Theft (See <a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a>) for access tokens<a href="#section-6.2.4.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.2.4.1-2.2">
+                <p id="section-6.2.4.1-2.2.1">Persistent Token Theft (See <a href="#payload-persistent-theft" class="auto internal xref">Section 5.1.2</a>) for access tokens<a href="#section-6.2.4.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.2.4.1-2.3">
+                <p id="section-6.2.4.1-2.3.1">Proxying Requests via the User's Browser (See <a href="#payload-proxy" class="auto internal xref">Section 5.1.4</a>)<a href="#section-6.2.4.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-6.2.4.1-3">Note that this attack scenario results in the following consequences:<a href="#section-6.2.4.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.4.1-4.1">
+                <p id="section-6.2.4.1-4.1.1">Exploiting Stolen Access Tokens (See <a href="#consequence-at" class="auto internal xref">Section 5.2.2</a>)<a href="#section-6.2.4.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.2.4.1-4.2">
+                <p id="section-6.2.4.1-4.2.1">Client Hijacking (See <a href="#consequence-hijack" class="auto internal xref">Section 5.2.3</a>)<a href="#section-6.2.4.1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-6.2.4.1-5">Exposing the access token to the JavaScript application is the core idea behind the architecture pattern of the token-mediating backend. As a result, the access token becomes vulnerable to token theft by malicious JavaScript.<a href="#section-6.2.4.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="mitigated-attack-scenarios-1">
@@ -1928,14 +2026,26 @@ extension (described in <a href="#pattern-bff-flow" class="auto internal xref">S
             <h5 id="name-mitigated-attack-scenarios-2">
 <a href="#section-6.2.4.2" class="section-number selfRef">6.2.4.2. </a><a href="#name-mitigated-attack-scenarios-2" class="section-name selfRef">Mitigated Attack Scenarios</a>
             </h5>
-<p id="section-6.2.4.2-1">The other payloads, listed below, are effectively mitigated by the BFF application architecture:
-* Single-Execution Token Theft (See <a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a>) for refresh tokens
-* Persistent Token Theft (See <a href="#payload-persistent-theft" class="auto internal xref">Section 5.1.2</a>) for refresh tokens
-* Acquisition and Extraction of New Tokens (See <a href="#payload-new-flow" class="auto internal xref">Section 5.1.3</a>)<a href="#section-6.2.4.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.2.4.2-2">The token-mediating backend counters the first two payloads by not exposing the refresh token to the browser-based application. Even when the attacker gains full control over the JavaScript application, there are simply no refresh tokens to be stolen.<a href="#section-6.2.4.2-2" class="pilcrow">¶</a></p>
-<p id="section-6.2.4.2-3">The third scenario, where the attacker obtains a fresh set of tokens by running a silent flow, is mitigated by making the token-mediating backend a confidential client. Even when the attacker manages to obtain an authorization code, they are prevented from exchanging this code due to the lack of client credentials.  Additionally, the use of PKCE prevents other attacks against the authorization code.<a href="#section-6.2.4.2-3" class="pilcrow">¶</a></p>
-<p id="section-6.2.4.2-4">Because of the nature of the token-mediating backend, the following consequences of potential attacks become irrelevant:
-* Exploiting Stolen Refresh Tokens (See <a href="#consequence-rt" class="auto internal xref">Section 5.2.1</a>)<a href="#section-6.2.4.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2.4.2-1">The other payloads, listed below, are effectively mitigated by the BFF application architecture:<a href="#section-6.2.4.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.4.2-2.1">
+                <p id="section-6.2.4.2-2.1.1">Single-Execution Token Theft (See <a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a>) for refresh tokens<a href="#section-6.2.4.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.2.4.2-2.2">
+                <p id="section-6.2.4.2-2.2.1">Persistent Token Theft (See <a href="#payload-persistent-theft" class="auto internal xref">Section 5.1.2</a>) for refresh tokens<a href="#section-6.2.4.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.2.4.2-2.3">
+                <p id="section-6.2.4.2-2.3.1">Acquisition and Extraction of New Tokens (See <a href="#payload-new-flow" class="auto internal xref">Section 5.1.3</a>)<a href="#section-6.2.4.2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-6.2.4.2-3">The token-mediating backend counters the first two payloads by not exposing the refresh token to the browser-based application. Even when the attacker gains full control over the JavaScript application, there are simply no refresh tokens to be stolen.<a href="#section-6.2.4.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2.4.2-4">The third scenario, where the attacker obtains a fresh set of tokens by running a silent flow, is mitigated by making the token-mediating backend a confidential client. Even when the attacker manages to obtain an authorization code, they are prevented from exchanging this code due to the lack of client credentials.  Additionally, the use of PKCE prevents other attacks against the authorization code.<a href="#section-6.2.4.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2.4.2-5">Because of the nature of the token-mediating backend, the following consequences of potential attacks become irrelevant:<a href="#section-6.2.4.2-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.4.2-6.1">
+                <p id="section-6.2.4.2-6.1.1">Exploiting Stolen Refresh Tokens (See <a href="#consequence-rt" class="auto internal xref">Section 5.2.1</a>)<a href="#section-6.2.4.2-6.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
 </section>
 </div>
 <div id="additional-defenses">
@@ -2260,16 +2370,34 @@ JavaScript if the policy does not allow sharing.<a href="#section-6.3.2.6-3" cla
             <h5 id="name-attack-payloads-and-consequen">
 <a href="#section-6.3.3.1" class="section-number selfRef">6.3.3.1. </a><a href="#name-attack-payloads-and-consequen" class="section-name selfRef">Attack Payloads and Consequences</a>
             </h5>
-<p id="section-6.3.3.1-1">If the attacker has the ability to execute malicious JavaScript code in the application's execution context, the following payloads become relevant attack scenarios:
-* Single-Execution Token Theft (See <a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a>)
-* Persistent Token Theft (See <a href="#payload-persistent-theft" class="auto internal xref">Section 5.1.2</a>)
-* Acquisition and Extraction of New Tokens (See <a href="#payload-new-flow" class="auto internal xref">Section 5.1.3</a>)
-* Proxying Requests via the User's Browser (See <a href="#payload-proxy" class="auto internal xref">Section 5.1.4</a>)<a href="#section-6.3.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.3.3.1-2">The most dangerous payload is the acquisition and extraction of new tokens. In this attack scenario, the attacker only interacts with the authorization server, which makes the actual implementation details of the OAuth functionality in the JavaScript client irrelevant. Even if the legitimate client application finds a perfectly secure token storage mechanism, the attacker will still be able to obtain tokens from the authorization server.<a href="#section-6.3.3.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.3.3.1-3">Note that these attack scenarios result in the following consequences:
-* Exploiting Stolen Refresh Tokens (See <a href="#consequence-rt" class="auto internal xref">Section 5.2.1</a>)
-* Exploiting Stolen Access Tokens (See <a href="#consequence-at" class="auto internal xref">Section 5.2.2</a>)
-* Client Hijacking (See <a href="#consequence-hijack" class="auto internal xref">Section 5.2.3</a>)<a href="#section-6.3.3.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.3.3.1-1">If the attacker has the ability to execute malicious JavaScript code in the application's execution context, the following payloads become relevant attack scenarios:<a href="#section-6.3.3.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3.3.1-2.1">
+                <p id="section-6.3.3.1-2.1.1">Single-Execution Token Theft (See <a href="#payload-single-theft" class="auto internal xref">Section 5.1.1</a>)<a href="#section-6.3.3.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.3.3.1-2.2">
+                <p id="section-6.3.3.1-2.2.1">Persistent Token Theft (See <a href="#payload-persistent-theft" class="auto internal xref">Section 5.1.2</a>)<a href="#section-6.3.3.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.3.3.1-2.3">
+                <p id="section-6.3.3.1-2.3.1">Acquisition and Extraction of New Tokens (See <a href="#payload-new-flow" class="auto internal xref">Section 5.1.3</a>)<a href="#section-6.3.3.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.3.3.1-2.4">
+                <p id="section-6.3.3.1-2.4.1">Proxying Requests via the User's Browser (See <a href="#payload-proxy" class="auto internal xref">Section 5.1.4</a>)<a href="#section-6.3.3.1-2.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-6.3.3.1-3">The most dangerous payload is the acquisition and extraction of new tokens. In this attack scenario, the attacker only interacts with the authorization server, which makes the actual implementation details of the OAuth functionality in the JavaScript client irrelevant. Even if the legitimate client application finds a perfectly secure token storage mechanism, the attacker will still be able to obtain tokens from the authorization server.<a href="#section-6.3.3.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.3.3.1-4">Note that these attack scenarios result in the following consequences:<a href="#section-6.3.3.1-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3.3.1-5.1">
+                <p id="section-6.3.3.1-5.1.1">Exploiting Stolen Refresh Tokens (See <a href="#consequence-rt" class="auto internal xref">Section 5.2.1</a>)<a href="#section-6.3.3.1-5.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.3.3.1-5.2">
+                <p id="section-6.3.3.1-5.2.1">Exploiting Stolen Access Tokens (See <a href="#consequence-at" class="auto internal xref">Section 5.2.2</a>)<a href="#section-6.3.3.1-5.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.3.3.1-5.3">
+                <p id="section-6.3.3.1-5.3.1">Client Hijacking (See <a href="#consequence-hijack" class="auto internal xref">Section 5.2.3</a>)<a href="#section-6.3.3.1-5.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
 </section>
 </div>
 <div id="additional-defenses-1">
@@ -2736,11 +2864,19 @@ as described in this document.<a href="#section-7.3-2" class="pilcrow">¶</a></p
         <h3 id="name-reducing-the-authority-of-t">
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-reducing-the-authority-of-t" class="section-name selfRef">Reducing the Authority of Tokens</a>
         </h3>
-<p id="section-9.1-1">A general security best practice in the OAuth world is to minimize the authority associated with access tokens. This best practice is applicable to all the architectures discussed in this specification. Concretely, the following considerations can be helpful in reducing the authority of access tokens:
-* Reduce the lifetime of access tokens and rely on refresh tokens for straightforward access token renewal
-* Reduce the scopes or permissions associated with the access token
-* Use <span>[<a href="#RFC8707" class="cite xref">RFC8707</a>]</span> to restrict access tokens to a single resource<a href="#section-9.1-1" class="pilcrow">¶</a></p>
-<p id="section-9.1-2">When OpenID Connect is used, it is important to avoid sensitive information disclosure through the claims in the identity token. The authorization server SHOULD NOT include any ID token claims that aren't used by the client.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
+<p id="section-9.1-1">A general security best practice in the OAuth world is to minimize the authority associated with access tokens. This best practice is applicable to all the architectures discussed in this specification. Concretely, the following considerations can be helpful in reducing the authority of access tokens:<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-9.1-2.1">
+            <p id="section-9.1-2.1.1">Reduce the lifetime of access tokens and rely on refresh tokens for straightforward access token renewal<a href="#section-9.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-9.1-2.2">
+            <p id="section-9.1-2.2.1">Reduce the scopes or permissions associated with the access token<a href="#section-9.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-9.1-2.3">
+            <p id="section-9.1-2.3.1">Use <span>[<a href="#RFC8707" class="cite xref">RFC8707</a>]</span> to restrict access tokens to a single resource<a href="#section-9.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-9.1-3">When OpenID Connect is used, it is important to avoid sensitive information disclosure through the claims in the identity token. The authorization server SHOULD NOT include any ID token claims that aren't used by the client.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sender-constrained-tokens">
