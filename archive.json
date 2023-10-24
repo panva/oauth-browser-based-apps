@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-10-22T00:36:28.613087+00:00",
+  "timestamp": "2023-10-24T00:33:47.701447+00:00",
   "repo": "oauth-wg/oauth-browser-based-apps",
   "labels": [
     {
@@ -260,6 +260,83 @@
           "updatedAt": "2023-03-13T19:06:31Z"
         }
       ]
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOCUe3lM50tMuk",
+      "title": "6.1.4.3 Suggestion: change text and remove significant burden ",
+      "url": "https://github.com/oauth-wg/oauth-browser-based-apps/issues/25",
+      "state": "OPEN",
+      "author": "damienbod",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "6.1.4.3. \r\n\r\n_Additionally, this pattern requires all interactions between the JavaScript application and the resource servers to be proxied by the BFF, which puts a significant burden on the server-side component._\r\n\r\nI usually use the BFF architecture without requiring a downstream API or a resource server and thus no proxy is required.  My server logic is deployed as part of the BFF server application.  \r\n",
+      "createdAt": "2023-10-23T20:53:23Z",
+      "updatedAt": "2023-10-23T22:04:38Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "aaronpk",
+          "authorAssociation": "MEMBER",
+          "body": "That sounds like that falls under the \"Not Using OAuth\" model: https://www.ietf.org/archive/id/draft-ietf-oauth-browser-based-apps-15.html#name-single-domain-browser-based",
+          "createdAt": "2023-10-23T20:57:24Z",
+          "updatedAt": "2023-10-23T20:57:24Z"
+        },
+        {
+          "author": "damienbod",
+          "authorAssociation": "NONE",
+          "body": "Hi @aaronpk yes it does sound like this, but I'm a bit confused because this is in the \"Discouraged and Deprecated Architecture Patterns\"  I still use OIDC (Confidential client Code flow with PKCE)\r\n\r\nThis is in effect the BFF without a downstream API. If I need a downstream API, then I add a proxy and request the scope when required. I see the proxy, downstream API as an add-on to the BFF. ",
+          "createdAt": "2023-10-23T21:16:16Z",
+          "updatedAt": "2023-10-23T21:19:49Z"
+        },
+        {
+          "author": "aaronpk",
+          "authorAssociation": "MEMBER",
+          "body": "Can you elaborate on that? Are you using OIDC only for user authentication, e.g. no access tokens involved then? I'm trying to figure out how your use of OIDC/OAuth fits in when there is no API.",
+          "createdAt": "2023-10-23T21:20:28Z",
+          "updatedAt": "2023-10-23T21:20:28Z"
+        },
+        {
+          "author": "damienbod",
+          "authorAssociation": "NONE",
+          "body": "Yes. The UI and the backend are authenticated as one using OIDC against any third party IDP etc. The session is stored in the form of a cookie as described in the doc. The APIs uses cookie authentication like the BFF. The backend APIs implement the business logic directly and there is no need for further API calls to different domains. Authz still needs a solution. If I need to use separate APIs on different domains, then I implement OAuth and add new scopes as required. At this point I would add the proxy, or just implement a Http Client. I don't always require a delegated user access token for the downstream APIs. I usually get an AT back from the OIDC server and can persist the claims to the cookie session as required. \r\n\r\nSo this is the BFF pattern described in section 6.1.1. The resource server part is not separated \"always\" from the BFF part, only when required.\r\n\r\nThis removes the  \"significant burden on the server-side component\"\r\n\r\nSection **6.1.2.4.  Deployment Scenarios** already mentions this pattern as well:\r\n\r\n_Serving the static JavaScript code is a separate responsibility from handling OAuth tokens and proxying requests. In the diagram presented above, the BFF and static web host are shown as two separate entities. In real-world deployment scenarios, these components can be deployed as a single service (i.e., the BFF serving the static JS code), as two separate services (i.e., a CDN and a BFF)_",
+          "createdAt": "2023-10-23T21:32:57Z",
+          "updatedAt": "2023-10-23T22:03:59Z"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOCUe3lM50td4Y",
+      "title": "Suggestion: add new section 6.1.3.3.3. Use Anti-forgery cookies",
+      "url": "https://github.com/oauth-wg/oauth-browser-based-apps/issues/26",
+      "state": "OPEN",
+      "author": "damienbod",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Because the UI and the backend APIs can be hosted from the same backend application, Anti-forgery tokens can also be used to protect against CSRF.",
+      "createdAt": "2023-10-23T21:46:41Z",
+      "updatedAt": "2023-10-23T21:46:41Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 27,
+      "id": "I_kwDOCUe3lM50tf5f",
+      "title": "security advantage BFF makes nonce based CSP possible",
+      "url": "https://github.com/oauth-wg/oauth-browser-based-apps/issues/27",
+      "state": "OPEN",
+      "author": "damienbod",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm not sure where this belongs, but I think it would be good to add it. \r\n\r\nBecause the BFF APIs and the UI can be hosted in the same application, it is easy  to implement a nonce based CSP for the UI scripts and styles. Modern JS framework now support this. This is very easy to implement when using BFF security architecture where the same application is used to host the APIs and the UI .",
+      "createdAt": "2023-10-23T21:53:55Z",
+      "updatedAt": "2023-10-23T22:06:47Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
