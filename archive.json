@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-10-24T00:33:47.701447+00:00",
+  "timestamp": "2023-11-07T00:34:38.490715+00:00",
   "repo": "oauth-wg/oauth-browser-based-apps",
   "labels": [
     {
@@ -52,7 +52,7 @@
       "url": "https://github.com/oauth-wg/oauth-browser-based-apps/issues/1",
       "state": "CLOSED",
       "author": "aaronpk",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "https://www.ietf.org/mail-archive/web/oauth/current/msg18518.html\r\n\r\n> > > First of all the AS decides whether it issues refresh tokens or not. Having the ability does not mean the AS must do it. If you feel it\u2019s safer to not do it. Fine. \r\n> > \r\n> > Sure, and this should be mentioned then somewhere (either in the threats doc or in this proposed best practice doc). Not all end developers using these protocols fully understand the ramifications. \r\n> \r\n> Aaron: I suggest this goes to the SPA BCP since this is client specific.\r\n",
@@ -62,7 +62,7 @@
       "comments": [
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "Added in 5cd12e9d5f7e58d614073ef5b073c40ae1ad5091",
           "createdAt": "2018-12-09T20:19:07Z",
           "updatedAt": "2018-12-09T20:19:07Z"
@@ -76,7 +76,7 @@
       "url": "https://github.com/oauth-wg/oauth-browser-based-apps/issues/2",
       "state": "CLOSED",
       "author": "aaronpk",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "* storing tokens available to JS opens up new XSS attack vectors\r\n* LocalStorage and IndexedDB are protected by the [same origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) so at least third party scripts can't access data there",
@@ -93,14 +93,14 @@
         },
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "Alright, this is a lot, but I finally put together the start to this section. I'm definitely open to suggestions and corrections. Here's the link to the current draft:\r\n\r\nhttps://drafts.oauth.net/oauth-browser-based-apps/draft-ietf-oauth-browser-based-apps.html#name-token-storage-in-the-browse\r\n\r\nIt's kind of a wall of text right now, so probably could use some help breaking it up into different sub-headers.",
           "createdAt": "2022-11-29T02:59:21Z",
           "updatedAt": "2022-11-29T02:59:21Z"
         },
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "This now has section headers and is a lot more readable. I also added a new section about sender-constrained tokens as well as a reference to DPoP.",
           "createdAt": "2022-12-01T00:51:01Z",
           "updatedAt": "2022-12-01T00:51:01Z"
@@ -114,7 +114,7 @@
       "url": "https://github.com/oauth-wg/oauth-browser-based-apps/issues/3",
       "state": "CLOSED",
       "author": "aaronpk",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "keeps the access token and refresh token out of the DOM-accessible JS, only accessible from within the Service Worker\r\n\r\nhttps://gitlab.com/jimdigriz/oauth2-worker\r\n",
@@ -124,7 +124,7 @@
       "comments": [
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "Done in #19 ",
           "createdAt": "2022-09-06T18:08:31Z",
           "updatedAt": "2022-09-06T18:08:31Z"
@@ -145,7 +145,7 @@
       "url": "https://github.com/oauth-wg/oauth-browser-based-apps/issues/4",
       "state": "CLOSED",
       "author": "aaronpk",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "> When differentiating between the 3 \u201cApplication Architecture Patterns\u201d, it would be very helpful if an example is given for each pattern so that readers better understand which pattern applies to them. For example, in 6.2, when it says \u201cJavaScript Applications with a Backend\u201d, it is possible to interpret that as the \u201cbackend\u201d meaning the application\u2019s API.",
@@ -178,28 +178,28 @@
         },
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "I went ahead and updated the refresh token rotation issue to match the security BCP. For some reason draft 07 changed it from \"MUST\" to \"SHOULD\", but I can't find any notes in the meeting minutes or mailing list that motivated that change. So instead I updated it to match the current security BCP text: MUST either use refresh token rotation or sender-constrained refresh tokens.",
           "createdAt": "2021-05-18T01:04:06Z",
           "updatedAt": "2021-05-18T01:04:06Z"
         },
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "I believe it was intentional to have the refresh token expiration be more strict in this draft compared to the security BCP. I've added the sentence about not extending the refresh token lifetime.",
           "createdAt": "2021-05-18T01:06:33Z",
           "updatedAt": "2021-05-18T01:06:33Z"
         },
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "Same with the implicit grant, it was intentional that the browser-based app spec is more strict than the Security BCP in that instance.",
           "createdAt": "2021-05-18T01:11:02Z",
           "updatedAt": "2021-05-18T01:11:02Z"
         },
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "This should be caught up now. Will probably have to do one more pass once the Security BCP is finished but I'll close this for now.",
           "createdAt": "2022-11-29T03:00:12Z",
           "updatedAt": "2022-11-29T03:00:12Z"
@@ -213,7 +213,7 @@
       "url": "https://github.com/oauth-wg/oauth-browser-based-apps/issues/14",
       "state": "CLOSED",
       "author": "aaronpk",
-      "authorAssociation": "COLLABORATOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "https://datatracker.ietf.org/doc/draft-bertocci-oauth2-tmi-bff/\r\n",
@@ -223,7 +223,7 @@
       "comments": [
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "Discussed in the side meeting: we'll start by describing the pattern (without defining the endpoints, and without actually referencing the expired draft), bring that to the next meeting, and see if there is further interest.",
           "createdAt": "2022-07-28T18:51:08Z",
           "updatedAt": "2022-07-28T18:51:08Z"
@@ -247,14 +247,14 @@
       "comments": [
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "Sounds like a reasonable middle ground, noting that you do lose out on some protections of avoiding the tokens ever hitting the browser.",
           "createdAt": "2023-03-13T19:02:15Z",
           "updatedAt": "2023-03-13T19:02:15Z"
         },
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "Now that I think about it, a better option would be to encrypt the tokens with a key known only to the proxies, that way the token value itself is never available to the browser. \r\n\r\nI don't know if this needs to be called out specifically, since this type of \"encrypted-cookie-as-stateless-storage\" pattern is pretty commonplace.",
           "createdAt": "2023-03-13T19:06:31Z",
           "updatedAt": "2023-03-13T19:06:31Z"
@@ -373,7 +373,7 @@
             "abbreviatedOid": "956bf36"
           },
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "CHANGES_REQUESTED",
           "body": "",
           "createdAt": "2021-05-17T23:29:03Z",
@@ -564,7 +564,7 @@
       "url": "https://github.com/oauth-wg/oauth-browser-based-apps/pull/13",
       "state": "CLOSED",
       "author": "ymajoros",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Here is a very first version.\r\n\r\nI think all information is present. However, I'm still trying to find out where everything should go. I think we should consider having separate _security concerns_ for each flow. Or maybe splitting the document in a section describing the architectural patterns, and another one about their security concerns, along with attacks and their mitigations. Both have merits IMO.",
@@ -583,7 +583,7 @@
       "comments": [
         {
           "author": "ymajoros",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Refactored this in multiple PRs",
           "createdAt": "2022-09-01T05:09:03Z",
           "updatedAt": "2022-09-01T05:09:03Z"
@@ -596,7 +596,7 @@
             "abbreviatedOid": "cc6d8d0"
           },
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-07-18T17:18:00Z",
@@ -616,7 +616,7 @@
             "abbreviatedOid": "cc6d8d0"
           },
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-07-18T17:19:18Z",
@@ -636,7 +636,7 @@
             "abbreviatedOid": "cc6d8d0"
           },
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-07-18T17:21:38Z",
@@ -656,7 +656,7 @@
             "abbreviatedOid": "cc6d8d0"
           },
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-07-18T17:22:03Z",
@@ -676,7 +676,7 @@
             "abbreviatedOid": "cc6d8d0"
           },
           "author": "ymajoros",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-07-21T14:24:29Z",
@@ -696,7 +696,7 @@
             "abbreviatedOid": "cc6d8d0"
           },
           "author": "ymajoros",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-07-21T14:29:08Z",
@@ -716,7 +716,7 @@
             "abbreviatedOid": "cc6d8d0"
           },
           "author": "ymajoros",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-07-21T14:35:34Z",
@@ -736,7 +736,7 @@
             "abbreviatedOid": "cc6d8d0"
           },
           "author": "ymajoros",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-07-21T14:39:39Z",
@@ -756,7 +756,7 @@
             "abbreviatedOid": "cc6d8d0"
           },
           "author": "ymajoros",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-07-21T15:04:24Z",
@@ -796,7 +796,7 @@
             "abbreviatedOid": "cc6d8d0"
           },
           "author": "ymajoros",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-07-29T06:52:09Z",
@@ -839,7 +839,7 @@
       "url": "https://github.com/oauth-wg/oauth-browser-based-apps/pull/15",
       "state": "MERGED",
       "author": "ymajoros",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Refactoring some architectural patterns:\r\n- Single-Domain Browser-Based Apps (not using OAuth)\r\n- Backend For Frontend (BFF) Proxy",
@@ -865,7 +865,7 @@
             "abbreviatedOid": "023af4d"
           },
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "CHANGES_REQUESTED",
           "body": "",
           "createdAt": "2022-08-31T17:13:51Z",
@@ -885,7 +885,7 @@
             "abbreviatedOid": "023af4d"
           },
           "author": "ymajoros",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-08-31T22:33:42Z",
@@ -908,7 +908,7 @@
       "url": "https://github.com/oauth-wg/oauth-browser-based-apps/pull/16",
       "state": "MERGED",
       "author": "ymajoros",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "reworked some architectural patterns: Javascript applications accessing resource servers directly (js = oauth client)",
@@ -934,7 +934,7 @@
             "abbreviatedOid": "a9667d1"
           },
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2022-08-31T17:20:06Z",
@@ -950,7 +950,7 @@
       "url": "https://github.com/oauth-wg/oauth-browser-based-apps/pull/17",
       "state": "MERGED",
       "author": "ymajoros",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
@@ -976,7 +976,7 @@
             "abbreviatedOid": "9783e98"
           },
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2022-08-31T17:31:51Z",
@@ -992,7 +992,7 @@
       "url": "https://github.com/oauth-wg/oauth-browser-based-apps/pull/18",
       "state": "CLOSED",
       "author": "ymajoros",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
@@ -1016,7 +1016,7 @@
             "abbreviatedOid": "347219e"
           },
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-08-31T19:05:16Z",
@@ -1036,7 +1036,7 @@
             "abbreviatedOid": "347219e"
           },
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-08-31T19:06:11Z",
@@ -1056,7 +1056,7 @@
             "abbreviatedOid": "347219e"
           },
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-08-31T19:06:53Z",
@@ -1076,7 +1076,7 @@
             "abbreviatedOid": "347219e"
           },
           "author": "ymajoros",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-09-01T07:08:37Z",
@@ -1096,7 +1096,7 @@
             "abbreviatedOid": "347219e"
           },
           "author": "ymajoros",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-09-01T07:17:17Z",
@@ -1116,7 +1116,7 @@
             "abbreviatedOid": "347219e"
           },
           "author": "ymajoros",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-09-01T07:20:05Z",
@@ -1160,7 +1160,7 @@
       "comments": [
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "This looks great. I'm going to merge this and make a few minor tweaks to it.",
           "createdAt": "2022-09-06T17:50:26Z",
           "updatedAt": "2022-09-06T17:50:26Z"
@@ -1203,7 +1203,7 @@
         },
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "I haven't dug too deep yet but isn't this an API to unregister a service worker? https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/unregister",
           "createdAt": "2022-09-08T12:45:58Z",
           "updatedAt": "2022-09-08T12:45:58Z"
@@ -1281,14 +1281,14 @@
       "comments": [
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "Thanks, I like this for the most part. \r\n\r\nI am not sure I agree with moving the Implicit Flow section into the \"Alternative Architecture Patterns\" section, since that makes it look like a legitimate choice. The idea of including it in the \"Security Considerations\" section was to provide the historical context for it without making it look like a current recommendation. If you are thinking that it isn't appropriate in the Security Considerations section, then maybe we can include it as a new top-level section.",
           "createdAt": "2023-08-28T17:52:34Z",
           "updatedAt": "2023-08-28T17:52:34Z"
         },
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "FYI I pushed this to a branch to trigger the auto-build to review it in the final form, you can view it here:\r\n\r\nhttps://drafts.oauth.net/oauth-browser-based-apps/restructuring/draft-ietf-oauth-browser-based-apps.html",
           "createdAt": "2023-08-28T17:58:34Z",
           "updatedAt": "2023-08-28T17:58:34Z"
@@ -1302,14 +1302,14 @@
         },
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "Yes that sounds good to me. I think we also need to rename the header \"First-Party Applications\" to \"Resource Owner Password Grant\" in that case.",
           "createdAt": "2023-09-01T14:07:11Z",
           "updatedAt": "2023-09-01T14:07:11Z"
         },
         {
           "author": "aaronpk",
-          "authorAssociation": "COLLABORATOR",
+          "authorAssociation": "MEMBER",
           "body": "I actually think we can keep the \"same-domain\" pattern in the \"discouraged\" section, since the point of that section was to demonstrate why you might want to use OAuth even in the same-domain situation. \r\n\r\nI just pushed a commit to this PR with the reworked headers, so I'll go ahead and merge this now!",
           "createdAt": "2023-09-01T14:39:59Z",
           "updatedAt": "2023-09-01T14:39:59Z"
