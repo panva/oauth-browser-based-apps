@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-11-21T00:36:23.143481+00:00",
+  "timestamp": "2023-11-23T00:35:33.993386+00:00",
   "repo": "oauth-wg/oauth-browser-based-apps",
   "labels": [
     {
@@ -273,7 +273,7 @@
       "labels": [],
       "body": "6.1.4.3. \r\n\r\n_Additionally, this pattern requires all interactions between the JavaScript application and the resource servers to be proxied by the BFF, which puts a significant burden on the server-side component._\r\n\r\nI usually use the BFF architecture without requiring a downstream API or a resource server and thus no proxy is required.  My server logic is deployed as part of the BFF server application.  \r\n",
       "createdAt": "2023-10-23T20:53:23Z",
-      "updatedAt": "2023-10-23T22:04:38Z",
+      "updatedAt": "2023-11-21T16:15:08Z",
       "closedAt": null,
       "comments": [
         {
@@ -303,6 +303,13 @@
           "body": "Yes. The UI and the backend are authenticated as one using OIDC against any third party IDP etc. The session is stored in the form of a cookie as described in the doc. The APIs uses cookie authentication like the BFF. The backend APIs implement the business logic directly and there is no need for further API calls to different domains. Authz still needs a solution. If I need to use separate APIs on different domains, then I implement OAuth and add new scopes as required. At this point I would add the proxy, or just implement a Http Client. I don't always require a delegated user access token for the downstream APIs. I usually get an AT back from the OIDC server and can persist the claims to the cookie session as required. \r\n\r\nSo this is the BFF pattern described in section 6.1.1. The resource server part is not separated \"always\" from the BFF part, only when required.\r\n\r\nThis removes the  \"significant burden on the server-side component\"\r\n\r\nSection **6.1.2.4.  Deployment Scenarios** already mentions this pattern as well:\r\n\r\n_Serving the static JavaScript code is a separate responsibility from handling OAuth tokens and proxying requests. In the diagram presented above, the BFF and static web host are shown as two separate entities. In real-world deployment scenarios, these components can be deployed as a single service (i.e., the BFF serving the static JS code), as two separate services (i.e., a CDN and a BFF)_",
           "createdAt": "2023-10-23T21:32:57Z",
           "updatedAt": "2023-10-23T22:03:59Z"
+        },
+        {
+          "author": "philippederyck",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@aaronpk This discussion is related to our discussion when we restructured the document. The \"no oauth\" model is indeed valid and would just rely on a session between the frontend and the \"API\" to keep track of user's authentication state.\n\nBack then, we weren't sure if this was discouraged, but agreed that it is not a core pattern of this spec, since it focuses on API-access with access tokens.\n\nTwo options: Either we rename this entire section (not my favorite), or we move the \"no oauth\" pattern upwards to section 4.\n\nLet me know what you think",
+          "createdAt": "2023-11-21T16:15:07Z",
+          "updatedAt": "2023-11-21T16:15:07Z"
         }
       ]
     },
@@ -318,25 +325,48 @@
       "labels": [],
       "body": "Because the UI and the backend APIs can be hosted from the same backend application, Anti-forgery tokens can also be used to protect against CSRF.",
       "createdAt": "2023-10-23T21:46:41Z",
-      "updatedAt": "2023-10-23T21:46:41Z",
+      "updatedAt": "2023-11-21T18:40:17Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "philippederyck",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "There are indeed various CSRF defenses that could be used in this architecture. The two options discussed in the current document explicitly focus on defenses that are part of the core web platform, and require minimal effort from the developer to implement. \n\nThe use of anti-forgery cookies requires code on both the frontend and the backend to guarantee their effectiveness.\n\nAre there benefits to using anti-forgery cookies over samesite cookies/CORS that we're missing?\n",
+          "createdAt": "2023-11-21T16:11:35Z",
+          "updatedAt": "2023-11-21T16:11:35Z"
+        },
+        {
+          "author": "damienbod",
+          "authorAssociation": "NONE",
+          "body": "I thought it would be good to add this as it is per default supported in some tech stacks and so easy to use. People reading the doc might read it as only the mentioned ways protect against CSRF. Adding this would make the recommendations more complete.\r\n\r\n\u201cAre there benefits to using anti-forgery cookies over samesite cookies/CORS that we're missing?\u201d\r\n\r\nIn my opinion, there are no benefits compared with the other two options, just another option. Samesite cookies/ anti-forgery cookies are also a viable option. If the used tech stack has this already supported per default, then there is less to do as a developer. This would make it an option.\r\n",
+          "createdAt": "2023-11-21T18:40:16Z",
+          "updatedAt": "2023-11-21T18:40:16Z"
+        }
+      ]
     },
     {
       "number": 27,
       "id": "I_kwDOCUe3lM50tf5f",
       "title": "security advantage BFF makes nonce based CSP possible",
       "url": "https://github.com/oauth-wg/oauth-browser-based-apps/issues/27",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "damienbod",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "I'm not sure where this belongs, but I think it would be good to add it. \r\n\r\nBecause the BFF APIs and the UI can be hosted in the same application, it is easy  to implement a nonce based CSP for the UI scripts and styles. Modern JS framework now support this. This is very easy to implement when using BFF security architecture where the same application is used to host the APIs and the UI .",
       "createdAt": "2023-10-23T21:53:55Z",
-      "updatedAt": "2023-10-23T22:06:47Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2023-11-21T18:40:37Z",
+      "closedAt": "2023-11-21T18:40:37Z",
+      "comments": [
+        {
+          "author": "philippederyck",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The use of CSP nonces requires the ability to insert a fresh nonce on every page load. \n\nWhile this is indeed possible by hosting the HTML page of the frontend application (SPA) on the BFF, it is not required to deploy a frontend this way. It is a perfectly valid pattern to deploy the SPA on a CDN and have it call the dynamic BFF component. In that case, nonces would not work, but hashes might.\n\nGiven that this advice is highly specific for CSP and less related to the BFF pattern, I'd opt to not go into these details in this spec.",
+          "createdAt": "2023-11-21T16:04:06Z",
+          "updatedAt": "2023-11-21T16:04:06Z"
+        }
+      ]
     }
   ],
   "pulls": [
