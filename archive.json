@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-12-14T00:35:42.656533+00:00",
+  "timestamp": "2023-12-17T00:39:08.591402+00:00",
   "repo": "oauth-wg/oauth-browser-based-apps",
   "labels": [
     {
@@ -1676,6 +1676,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOCUe3lM5iA1_9",
+      "title": "Fix minor editorial issues",
+      "url": "https://github.com/oauth-wg/oauth-browser-based-apps/pull/28",
+      "state": "OPEN",
+      "author": "iphoneintosh",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "* Remove doubled \"... section Section ...\"\r\n* Replace \"BFF\" with \"token-mediating backend\" in token-mediating backend section\r\n* Remote redundant \"In browser\" wording",
+      "createdAt": "2023-12-14T15:09:44Z",
+      "updatedAt": "2023-12-14T16:09:24Z",
+      "baseRepository": "oauth-wg/oauth-browser-based-apps",
+      "baseRefName": "main",
+      "baseRefOid": "5d2a4cd84e8d4ce47ef3f0bfcf74404b5d22a3f8",
+      "headRepository": "iphoneintosh/oauth-browser-based-apps",
+      "headRefName": "fix-editorial-issues",
+      "headRefOid": "48be6c1bcb6fc63fc6e75b51bf04bd6a0d3434eb",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
